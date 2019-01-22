@@ -2,10 +2,10 @@
 const questions = [{
     question: "Goner Records first release was a title by:",
     options: ["Reigning Sound", "Guitar Wolf", "Jay Reatard", "Coco Coma"],
-    answer: "Guitar Wolf"},
-    {question: "tk",
-    options: ['tk','tk','tk','tk'],
-    answer: "tk"}
+    answer: 1},
+    {question: "Hozac Records was originally a zine called",
+    options: ['Honga Zonga','Hot Zesty Action','Horizontal Action','Hog Zed Ace'],
+    answer: 2}
 ];
 
 // global variables
@@ -16,6 +16,7 @@ var nullAnswerTally = 0;
 var displayedQuestion = "";
 var userChoice = "";
 var questionCounter = 0;
+
 
 
 
@@ -30,20 +31,38 @@ var questionCounter = 0;
 //     $('#main-div').append('<button id="new-button">Lets go</button>');
 // }
 
-// function to load the questions. 
-function loadQuestions(){
-    $('#main-div').append('<div id="question-box"></div>')
-    $('#question-box').append(questions[questionCounter].question + '<br>');
+function createGameDivs(){
+    $('#main-div').append('<div id="question-box"></div>');
     $('#main-div').append('<div id="answer-zone"></div>')
-    // $('#answer-zone').append(questions[questionCounter].options)
-    for (let i = 0; i < questions[questionCounter].options.length; i++) {
-        // $('#answer-zone').append('<p >' + questions[questionCounter].options[i] + '</p>');
-        // $('#answer-zone').append('<id="answer-'i'">'questions[questionCounter].options[i] + '<br>')
-        $('#answer-zone').append(`<button id="answer-${i}" class="answer-buttons">${questions[questionCounter].options[i]} </button><br> <this.match=${i}>`);
-        
+}
+
+function loadQuestions(){
+    $('#question-box').empty();
+    $('#answer-zone').empty();
+    $('#question-box').html(questions[questionCounter].question + '<br>');
+    for (let i = 0; i < questions[questionCounter].options.length; i++){
+        $('#answer-zone').append(`<button id="answer-${i}" class="answer-buttons" value=${i}>${questions[questionCounter].options[i]} </button><br> `);
     }
 }
 
+
+
+// function to load the questions. 
+// function loadQuestions(){
+//     $('#main-div').append('<div id="question-box"></div>')
+//     $('#question-box').append(questions[questionCounter].question + '<br>');
+//     $('#main-div').append('<div id="answer-zone"></div>')
+//     // $('#answer-zone').append(questions[questionCounter].options)
+    
+//     for (let i = 0; i < questions[questionCounter].options.length; i++) {
+//         // $('#answer-zone').append('<p >' + questions[questionCounter].options[i] + '</p>');
+//         // $('#answer-zone').append('<id="answer-'i'">'questions[questionCounter].options[i] + '<br>')
+//         $('#answer-zone').append(`<button id="answer-${i}" class="answer-buttons" value=${i}>${questions[questionCounter].options[i]} </button><br> `);
+//     };
+//     var currentAnswer = (questions[questionCounter].answer);
+// }
+
+// function to create gameplay divs that leads to function to load questions
 
 // function to compare user input with correct answer
 // function compareInputs(){
@@ -80,11 +99,24 @@ function loadQuestions(){
 // })
 $("#start-button").click(function(){
     $('#start-button').hide();
-    loadQuestions()
+    createGameDivs();
+    loadQuestions();
 });
 
 $(document).on('click','.answer-buttons',function(){
-   if (this.match === questions[0].answer) {
-       alert("nice")
-   }
+   alert("button value is " + this.value);
+   alert("answer value is " +questions[questionCounter].answer);
+
+   if (this.value === questions[questionCounter].answer) {
+       alert("nice");
+       
+//    }
+//     else if (this.value == 2 && questions[1]) {
+//        alert("nice");
+       
+   } else {
+       alert("lame")
+   };
+   questionCounter++;
+   loadQuestions();
 })
