@@ -37,7 +37,9 @@ function loadQuestions(){
     $('#main-div').append('<div id="answer-zone"></div>')
     // $('#answer-zone').append(questions[questionCounter].options)
     for (let i = 0; i < questions[questionCounter].options.length; i++) {
-        $('#answer-zone').append(questions[questionCounter].options[i] + '<br>');
+        // $('#answer-zone').append('<p >' + questions[questionCounter].options[i] + '</p>');
+        // $('#answer-zone').append('<id="answer-'i'">'questions[questionCounter].options[i] + '<br>')
+        $('#answer-zone').append(`<button id="answer-${i}" class="answer-buttons">${questions[questionCounter].options[i]} </button><br> <this.match=${i}>`);
         
     }
 }
@@ -70,11 +72,19 @@ function loadQuestions(){
 // $("#start-button").click(function(){
 //     writeGreeting()
 // });
+// document.getElementsByClassName("answer-buttons").addEventListener("click", alert("clicks"));
+
+// $(".answer-buttons").click(function(){
+//     // loadQuestions()
+//     alert("pressed it!");
+// })
 $("#start-button").click(function(){
     $('#start-button').hide();
     loadQuestions()
 });
-$("#new-button").click(function(){
-    // loadQuestions()
-    alert("pressed it!")
-}); 
+
+$(document).on('click','.answer-buttons',function(){
+   if (this.match === questions[0].answer) {
+       alert("nice")
+   }
+})
