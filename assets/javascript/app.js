@@ -65,7 +65,6 @@ $("#start-button").click(function(){
 $(document).on('click','.answer-buttons',function(){
     $('#timer-box').remove();
    if (this.value == questions[questionCounter].answer) {
-       alert("nice");
        correctTally++;
    } else {   
        incorrectTally++;
